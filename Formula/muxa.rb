@@ -40,3 +40,5 @@ class Muxa < Formula
     assert_match version.to_s, shell_output("#{bin}/muxa --version")
   end
 end
+
+# tap-bump write probe 2026-08-31T05:45Z — this line must be removed by the workflow

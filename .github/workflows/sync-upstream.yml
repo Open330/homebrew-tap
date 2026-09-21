@@ -1,0 +1,102 @@
+name: sync-upstream
+
+# Pull the tracked casks and formulae up to whatever their upstream project has
+# released, on a schedule, from inside this repository.
+#
+# It exists because the push side is not enough. The barshelf cask and the
+# barshelf-cli formula sat at 0.1.3 while that project shipped 0.3.0: nobody
+# bumped them by hand, and nothing noticed. Homebrew users were then told by
+# the app to run `brew upgrade --cask barshelf` and told by brew that they were
+# already current — no update path at all.
+#
+# Running here rather than in each upstream repo is what makes it free of
+# credentials: a workflow in this repository can push to this repository with
+# the automatic GITHUB_TOKEN, so there is no cross-repo PAT to mint, store,
+# rotate or lose. (`muxa` pushes here from its own release with a
+# TAP_GITHUB_TOKEN PAT, which is instant; this is the net under it.)
+#
+# The bump itself is `brew livecheck` + `brew bump-*-pr`, not a hand-written
+# template: Homebrew works out the new version from the upstream releases and
+# recomputes the sha256 from the artifact it downloads. A template in a
+# workflow has to be kept in step with the real file by hand, and silently
+# overwrites anything edited here.
+#
+# Only single-artifact entries are listed. `aas`, `agt` and `muxa` ship one URL
+# and sha256 per platform, which `bump-formula-pr` cannot recompute from a
+# version alone; those keep their own path.
+
+on:
+  schedule:
+    # Daily. A release reaches users within a day even if every push fails.
+    - cron: "17 6 * * *"
+  workflow_dispatch:
+    inputs:
+      only:
+        description: "Sync one item only (e.g. barshelf, barshelf-cli). Blank syncs all."
+        required: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-upstream
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    name: sync tracked entries
+    # macOS: casks cannot be evaluated by Homebrew on Linux.
+    runs-on: macos-latest
+    steps:
+      - name: Sync
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ONLY: ${{ inputs.only }}
+          HOMEBREW_NO_AUTO_UPDATE: "1"
+          HOMEBREW_NO_INSTALL_CLEANUP: "1"
+          HOMEBREW_DEVELOPER: "1"
+        run: |
+          set -euo pipefail
+
+          # "<cask|formula> <name>" — the kind also names the bump command.
+          ITEMS='cask barshelf
+          formula barshelf-cli'
+
+          brew tap open330/tap
+          # Newer Homebrew refuses to load third-party tap items until trusted;
+          # older versions have no such command.
+          brew trust open330/tap >/dev/null 2>&1 || true
+          cd "$(brew --repository open330/tap)"
+          git remote set-url origin \
+            "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          bumped=""
+          while read -r kind name; do
+            [ -n "${kind}" ] || continue
+            if [ -n "${ONLY}" ] && [ "${ONLY}" != "${name}" ]; then
+              continue
+            fi
+            latest=$(brew livecheck "--${kind}" "open330/tap/${name}" \
+              --newer-only --json | jq -r '.[0].version.latest // empty')
+            if [ -z "${latest}" ]; then
+              echo "::notice::${name} is up to date"
+              continue
+            fi
+            echo "::notice::${name} -> ${latest}"
+            # --write-only edits the file in place; without it brew would try to
+            # fork this repo and open a pull request against it.
+            brew "bump-${kind}-pr" --write-only --no-audit \
+              --version="${latest}" "open330/tap/${name}"
+            bumped="${bumped}${bumped:+, }${name} ${latest}"
+          done <<< "$(echo "${ITEMS}" | sed 's/^[[:space:]]*//')"
+
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "tap already matches every upstream release"
+            exit 0
+          fi
+          git add -A
+          git commit -m "${bumped}"
+          git push
+          echo "::notice::pushed: ${bumped}"

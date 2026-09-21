@@ -37,14 +37,14 @@ Platform notes:
 | Name                                | Description                                                                 | Install                                     |
 | ----------------------------------- | --------------------------------------------------------------------------- | ------------------------------------------- |
 | [`amux`](Casks/amux.rb)             | Agent-first terminal with tmux-native workspaces.                           | `brew install --cask open330/tap/amux`      |
-| [`barshelf`](Casks/barshelf.rb)     | Menu bar app: OTP codes, LLM usage, recent files, CI status widgets (arm64). | `brew install --cask open330/tap/barshelf`  |
+| [`barshelf`](Casks/barshelf.rb)     | Scriptable menu bar widget platform (arm64).                                | `brew install --cask open330/tap/barshelf`  |
 | [`muxa-app`](Casks/muxa-app.rb)     | Native workbench for the muxa agent orchestration daemon.                   | `brew install --cask open330/tap/muxa-app`  |
 
 ## Keeping formulae up to date
 
 Each formula and cask pins a version + SHA256 tuple that points at a GitHub
 Release artifact in the upstream repo. Where the upstream project has a tap
-bump workflow (`muxa` uses `.github/workflows/tap-bump.yml`, driven by a
+bump workflow (`muxa` and `barshelf` use `.github/workflows/tap-bump.yml`, driven by a
 `TAP_GITHUB_TOKEN` fine-grained PAT with Contents read/write on this repo), a
 new release pushes the updated `Formula/*.rb` / `Casks/*.rb` here directly.
 Other projects are bumped by hand: update `version`, `url`, and `sha256`, then

@@ -1,24 +1,35 @@
 cask "barshelf" do
-  version "0.1.3"
-  sha256 "a77facbf476e974532d338f792db652470da60a37a1d3eba7ad2500cd37cefae"
+  version "0.3.0"
+  sha256 "e78a2bdce7d81938cf09dc385a5dda1850b631df78916ce04f243391dec94939"
 
   url "https://github.com/Open330/barshelf/releases/download/v#{version}/BarShelf-#{version}-arm64.zip"
   name "BarShelf"
-  desc "Menu bar app with OTP codes, LLM usage, recent files, and CI status widgets"
+  desc "Scriptable menu bar widget platform"
   homepage "https://github.com/Open330/barshelf"
 
-  # No Sparkle feed in the bundle: Homebrew is the update path.
+  # Deliberately no `auto_updates true`. BarShelf *can* replace itself, but it
+  # detects a Homebrew-installed copy and refuses, pointing at
+  # `brew upgrade --cask barshelf` instead. Declaring auto_updates would make
+  # `brew upgrade` skip this cask, and the two together leave no update path
+  # at all.
   depends_on arch: :arm64
   depends_on macos: :ventura
 
   app "BarShelf.app"
 
+  # A menu bar app is almost always running, and replacing a live bundle
+  # leaves the old build in memory until the user notices.
   uninstall quit: "com.barshelf.app"
 
+  # Everything the app owns. The widgets directory is the one that matters:
+  # losing it costs the user their installed widgets, so it is zap-only and
+  # never touched by a plain uninstall.
   zap trash: [
-    "~/Library/Application Support/BarShelf",
+    "~/Library/Application Support/barshelf",
+    "~/Library/Caches/BarShelf",
     "~/Library/Caches/com.barshelf.app",
     "~/Library/HTTPStorages/com.barshelf.app",
+    "~/Library/Logs/BarShelf",
     "~/Library/Preferences/com.barshelf.app.plist",
     "~/Library/Saved Application State/com.barshelf.app.savedState",
   ]

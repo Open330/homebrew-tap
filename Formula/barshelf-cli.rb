@@ -1,7 +1,7 @@
 class BarshelfCli < Formula
   desc "Widget developer CLI for the BarShelf macOS menu bar app"
   homepage "https://github.com/Open330/barshelf"
-  version "0.3.0"
+  version "0.2.1"
   url "https://github.com/Open330/barshelf/releases/download/v#{version}/barshelf-cli-#{version}-arm64.tar.gz"
   sha256 "c11373a6ef2f6ed2611ce30f6cb95cece8e81cfd64a9989a3ac43829bac7c18b"
   license "MIT"

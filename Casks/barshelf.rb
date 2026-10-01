@@ -13,7 +13,7 @@ cask "barshelf" do
   # `brew upgrade` skip this cask, and the two together leave no update path
   # at all.
   depends_on arch: :arm64
-  depends_on macos: :ventura
+  depends_on macos: :sonoma
 
   app "BarShelf.app"
 

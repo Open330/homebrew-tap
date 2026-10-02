@@ -8,6 +8,14 @@ class BarshelfCli < Formula
   sha256 "2560fea8cea959ffe385ca0c7ccd3f93fbd28ea14db6a10b6dfa53dc32ab55d9"
   license "MIT"
 
+  # Follow GitHub's "latest" release, which excludes pre-releases. Without
+  # this, livecheck reads git tags and sync-upstream shipped a pre-release
+  # tag (v0.5.0) to every Homebrew user.
+  livecheck do
+    url :url
+    strategy :github_latest
+  end
+
   # Upstream ships Apple Silicon binaries only.
   depends_on arch: :arm64
   depends_on :macos

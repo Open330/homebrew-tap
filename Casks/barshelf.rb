@@ -7,6 +7,14 @@ cask "barshelf" do
   desc "Scriptable menu bar widget platform"
   homepage "https://github.com/Open330/barshelf"
 
+  # Follow GitHub's "latest" release, which excludes pre-releases. Without
+  # this, livecheck reads git tags and sync-upstream shipped a pre-release
+  # tag (v0.5.0) to every Homebrew user.
+  livecheck do
+    url :url
+    strategy :github_latest
+  end
+
   # Deliberately no `auto_updates true`. BarShelf *can* replace itself, but it
   # detects a Homebrew-installed copy and refuses, pointing at
   # `brew upgrade --cask barshelf` instead. Declaring auto_updates would make

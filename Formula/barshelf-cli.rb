@@ -12,7 +12,7 @@ class BarshelfCli < Formula
   # this, livecheck reads git tags and sync-upstream shipped a pre-release
   # tag (v0.5.0) to every Homebrew user.
   livecheck do
-    url :url
+    url :stable
     strategy :github_latest
   end
 

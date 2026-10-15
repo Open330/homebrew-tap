@@ -1,6 +1,6 @@
 cask "muxa-app" do
-  version "0.8.57"
-  sha256 "5aa7a37be75bcf51fe5564f4a5a1f42ec37456225a98a344f8c05782078318b4"
+  version "0.8.58"
+  sha256 "65c091a0cbf62cd549674ec61674a28ade4c27602e9c21828b4ef0a6b4495356"
 
   url "https://github.com/Open330/muxa/releases/download/v#{version}/Muxa-#{version}.dmg"
   name "Muxa"

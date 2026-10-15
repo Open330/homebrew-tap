@@ -60,3 +60,4 @@ class Muxa < Formula
     assert_match version.to_s, shell_output("#{bin}/muxa --version")
   end
 end
+# deploy-key write test

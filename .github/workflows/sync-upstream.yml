@@ -51,6 +51,11 @@ jobs:
       - name: Sync
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Homebrew reads only this name. Without it `livecheck`'s
+          # :github_latest lookups go out unauthenticated and share the
+          # runner IP's 60-an-hour limit, which is why runs failed at random
+          # with a bare exit 1.
+          HOMEBREW_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ONLY: ${{ inputs.only }}
           HOMEBREW_NO_AUTO_UPDATE: "1"
           HOMEBREW_NO_INSTALL_CLEANUP: "1"

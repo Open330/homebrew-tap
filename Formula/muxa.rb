@@ -1,26 +1,26 @@
 class Muxa < Formula
   desc "Agent CLI observability and orchestration layer for terminal multiplexers"
   homepage "https://github.com/Open330/muxa"
-  version "0.9.6"
+  version "0.9.7"
   license "MIT OR Apache-2.0"
 
   on_macos do
     if Hardware::CPU.arm?
       url "https://github.com/Open330/muxa/releases/download/v#{version}/muxa-v#{version}-aarch64-apple-darwin.tar.gz"
-      sha256 "540244eb7688ccb0e957221d69d65f7550ab71c070018c4bd6be88a7ad77b68b"
+      sha256 "27ac7b5ea25e13e4cd5d356886c903db288af43d0e5736256ce6154a792b075d"
     else
       url "https://github.com/Open330/muxa/releases/download/v#{version}/muxa-v#{version}-x86_64-apple-darwin.tar.gz"
-      sha256 "82928b08420b0566e203a36ea1f39d6a33501b95eea677d1ce98da8be99a887e"
+      sha256 "81c7e00dc7a36f55874f29d761fc68bb648b1d99f3b8959ceec6e24efd06beee"
     end
   end
 
   on_linux do
     if Hardware::CPU.arm?
       url "https://github.com/Open330/muxa/releases/download/v#{version}/muxa-v#{version}-aarch64-unknown-linux-gnu.tar.gz"
-      sha256 "ca9c5221ceafcc948ba62c89d04ebbbdb920532c155f91d6bc4a8590998cfbd0"
+      sha256 "4e03ad86104373bdb5a7a0fd34dc7335072ad4c74a7fb59d54a040717d508d90"
     else
       url "https://github.com/Open330/muxa/releases/download/v#{version}/muxa-v#{version}-x86_64-unknown-linux-gnu.tar.gz"
-      sha256 "102974869f983b8f85175bf8de0fcb80d4223a5d173d2b54d76ff0891de26569"
+      sha256 "44f7e44d73e68c972b1af43577cdf7d8fddb58a9ffd08b18fbd81cb7adf82dc7"
     end
   end
 

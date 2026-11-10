@@ -32,10 +32,17 @@ cask "barshelf" do
   # Everything the app owns. The widgets directory is the one that matters:
   # losing it costs the user their installed widgets, so it is zap-only and
   # never touched by a plain uninstall.
+  #
+  # The desktop widget extension is sandboxed: its container, the app
+  # group it shares with the app, and their Application Scripts folders.
   zap trash: [
+    "~/Library/Application Scripts/728FW73BS8.com.barshelf.shared",
+    "~/Library/Application Scripts/com.barshelf.app.widgets",
     "~/Library/Application Support/barshelf",
     "~/Library/Caches/BarShelf",
     "~/Library/Caches/com.barshelf.app",
+    "~/Library/Containers/com.barshelf.app.widgets",
+    "~/Library/Group Containers/728FW73BS8.com.barshelf.shared",
     "~/Library/HTTPStorages/com.barshelf.app",
     "~/Library/Logs/BarShelf",
     "~/Library/Preferences/com.barshelf.app.plist",

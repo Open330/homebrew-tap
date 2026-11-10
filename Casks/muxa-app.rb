@@ -7,6 +7,8 @@ cask "muxa-app" do
   desc "Native workbench for the muxa agent orchestration daemon"
   homepage "https://github.com/Open330/muxa"
 
+  deprecate! date: "2026-11-10", because: "is now Tend: brew install --cask open330/tap/tend-app"
+
   # No Sparkle in this app: Homebrew is the update path, so leave
   # auto_updates at its default of false.
   depends_on macos: :ventura

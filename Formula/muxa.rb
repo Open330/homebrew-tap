@@ -4,6 +4,8 @@ class Muxa < Formula
   version "0.9.10"
   license "MIT OR Apache-2.0"
 
+  deprecate! date: "2026-11-10", because: "is now tend: brew install open330/tap/tend, then run scripts/migrate-from-muxa.py from https://github.com/Open330/tend"
+
   on_macos do
     if Hardware::CPU.arm?
       url "https://github.com/Open330/muxa/releases/download/v#{version}/muxa-v#{version}-aarch64-apple-darwin.tar.gz"

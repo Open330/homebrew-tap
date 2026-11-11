@@ -1,6 +1,6 @@
 cask "tend-app" do
-  version "0.10.6"
-  sha256 "7e977697c2819a4458c11db1a6b10da33f755909dcd204282da30117c773d7f2"
+  version "0.10.7"
+  sha256 "4acc11297f33715393bb10686f679ed1cbcc8887d5bc262407301f2647578a3f"
 
   url "https://github.com/Open330/tend/releases/download/v#{version}/Tend-#{version}.dmg"
   name "Tend"

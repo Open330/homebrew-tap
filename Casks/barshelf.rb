@@ -1,6 +1,6 @@
 cask "barshelf" do
-  version "0.7.29"
-  sha256 "5533df11d39ef7d8abc68dbcea6b8a280371292fd59b5ccdb23b353342764b18"
+  version "0.7.30"
+  sha256 "15e8d523dfb42db8264419ce7c7b2ad8db55e52b86b8a0dab94cfc3ab7f662c0"
 
   url "https://github.com/Open330/barshelf/releases/download/v#{version}/BarShelf-#{version}-arm64.zip"
   name "BarShelf"

@@ -4,8 +4,8 @@ class BarshelfCli < Formula
   # The version is spelled out in the URL rather than interpolated from a
   # `version` stanza: that is what `brew bump-formula-pr` substitutes into, and
   # sync-upstream.yml relies on it.
-  url "https://github.com/Open330/barshelf/releases/download/v0.7.26/barshelf-cli-0.7.26-arm64.tar.gz"
-  sha256 "8b567abc1271eeedb7f8eec7095e780e8d57c58b8d2ead54670030a177d22633"
+  url "https://github.com/Open330/barshelf/releases/download/v0.7.27/barshelf-cli-0.7.27-arm64.tar.gz"
+  sha256 "d77cff79d4d94c5eb1366b771996778cf73bcde3cbbca2e280dbdf2a5fe21ffd"
   license "MIT"
 
   # Follow GitHub's "latest" release, which excludes pre-releases. Without

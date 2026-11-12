@@ -1,26 +1,26 @@
 class Aas < Formula
   desc "Agent Account Switcher: multi-account switcher for LLM coding agents"
   homepage "https://github.com/Open330/aas"
-  version "0.1.13"
+  version "0.1.16"
   license "MIT"
 
   on_macos do
     if Hardware::CPU.arm?
       url "https://github.com/Open330/aas/releases/download/v#{version}/aas-aarch64-apple-darwin.tar.gz"
-      sha256 "606a3b66011429fe9753c93295db2e4924d4c2c65026d7f870efb5bb13949093"
+      sha256 "d823241aba86f628873ed3194c1cd26b27f0d625535c0bf53c9edacedab7217b"
     else
       url "https://github.com/Open330/aas/releases/download/v#{version}/aas-x86_64-apple-darwin.tar.gz"
-      sha256 "fa1cb19f59dca195d26232e1343fda36308b790e93795012ede37a7c5c776ff0"
+      sha256 "4a05c953c162dfd0c876d88fac3252fd99afa8d1ccfbcaca3c2fc649a76470e1"
     end
   end
 
   on_linux do
     if Hardware::CPU.arm?
       url "https://github.com/Open330/aas/releases/download/v#{version}/aas-aarch64-unknown-linux-musl.tar.gz"
-      sha256 "637a0d1cb21b837345fe0a4f3a68d8815399fe97231a42470dc002d8f498925b"
+      sha256 "c96a636f35713c2d620213eda7998b3f42bad81477360b0599e21a6a10220a8b"
     else
       url "https://github.com/Open330/aas/releases/download/v#{version}/aas-x86_64-unknown-linux-musl.tar.gz"
-      sha256 "8a58667a3fac5c3c85910c236527fc3438fd2a704cbd02b3bcb4b9212797aa23"
+      sha256 "c948566aa36d5b083d649bfc0abac3195b8685b04d19969a7de35fec9dd2cb62"
     end
   end
 

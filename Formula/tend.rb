@@ -1,26 +1,26 @@
 class Tend < Formula
   desc "Agent CLI observability and orchestration layer for terminal multiplexers"
   homepage "https://github.com/Open330/tend"
-  version "0.10.35"
+  version "0.10.36"
   license "MIT OR Apache-2.0"
 
   on_macos do
     if Hardware::CPU.arm?
       url "https://github.com/Open330/tend/releases/download/v#{version}/tend-v#{version}-aarch64-apple-darwin.tar.gz"
-      sha256 "62cab21e96a0a8544cfcf9df57f18ee6077f320a286f8a7ab637924071f5894a"
+      sha256 "884257b67f375d1c37639a5cdec2a5feebba42c079b381e5f6b53e8bde79182c"
     else
       url "https://github.com/Open330/tend/releases/download/v#{version}/tend-v#{version}-x86_64-apple-darwin.tar.gz"
-      sha256 "fda4bfcc2827ee9b940f192b84695f3a85cb3ff878c4215dea1de8574367cb69"
+      sha256 "fb1646d5e26eb41603139184b01d9a5cbf946699f49b55ecfc435c8ee363b27d"
     end
   end
 
   on_linux do
     if Hardware::CPU.arm?
       url "https://github.com/Open330/tend/releases/download/v#{version}/tend-v#{version}-aarch64-unknown-linux-gnu.tar.gz"
-      sha256 "8d5c0e898467850b1ca6593fcf1b1f6ff40b13994dce50c9588b279dbb6bcdf5"
+      sha256 "411bb839b81a2f6b2b42662ed6cf7e8b50dba9dd59ce4cce45115995b4f364fc"
     else
       url "https://github.com/Open330/tend/releases/download/v#{version}/tend-v#{version}-x86_64-unknown-linux-gnu.tar.gz"
-      sha256 "a084bb71da1509ba78d9d027348837f15b7501808abc248f22d55b701c35012a"
+      sha256 "faa53b8fb72c74365950d7b347b6e44781d3eb9f9abcf39f7865240b7066fc00"
     end
   end
 
